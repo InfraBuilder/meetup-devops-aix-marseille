@@ -37,8 +37,4 @@ resource "aws_efs_mount_target" "mount_b" {
   file_system_id = "${aws_efs_file_system.efs_meetup.id}"
   subnet_id      = "${aws_subnet.meetup_1b.id}"
   security_groups = ["${aws_security_group.nfs.id}"]
-
-  provisioner "local-exec" {
-    command = "sed -i '/NFS_SERVER=/ c\vNFS_SERVER=${aws_efs_mount_target.mount_b.dns_name}' ../rancher/rancher-nfs.txt"
-  }
 }
